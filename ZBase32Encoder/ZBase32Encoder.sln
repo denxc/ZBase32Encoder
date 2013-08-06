@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZBase32Encoder", "ZBase32Encoder\ZBase32Encoder.csproj", "{B920F2FC-4D39-4D05-AB86-A44DFDD6FD2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZBase32EncoderTests", "ZBase32EncoderTests\ZBase32EncoderTests.csproj", "{44007B31-0B12-4004-A70D-1AD2A3CB84B3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B920F2FC-4D39-4D05-AB86-A44DFDD6FD2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B920F2FC-4D39-4D05-AB86-A44DFDD6FD2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B920F2FC-4D39-4D05-AB86-A44DFDD6FD2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B920F2FC-4D39-4D05-AB86-A44DFDD6FD2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44007B31-0B12-4004-A70D-1AD2A3CB84B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44007B31-0B12-4004-A70D-1AD2A3CB84B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44007B31-0B12-4004-A70D-1AD2A3CB84B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44007B31-0B12-4004-A70D-1AD2A3CB84B3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
