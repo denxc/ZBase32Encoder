@@ -67,7 +67,7 @@
             var result = new List<byte>((int)Math.Ceiling(data.Length * 5.0 / 8.0));
 
             var index = new int[8];
-            for (var i = 0; i < data.Length; )
+            for (var i = 0; i < data.Length;)
             {
                 i = CreateIndexByOctetAndMovePosition(ref data, i, ref index);
 

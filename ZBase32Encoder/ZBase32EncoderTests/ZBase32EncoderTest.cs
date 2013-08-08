@@ -32,7 +32,7 @@
             var encodedData = ZBase32Encoder.Encode(bytes);
             var decodedData = ZBase32Encoder.Decode(encodedData);
 
-            Assert.AreEqual(sourceData, decodedData);
+            Assert.That(Encoding.ASCII.GetBytes(sourceData), Is.EquivalentTo(decodedData));
         }
     }
 }
