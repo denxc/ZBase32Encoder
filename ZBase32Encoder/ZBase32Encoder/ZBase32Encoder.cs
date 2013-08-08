@@ -1,24 +1,25 @@
 ﻿namespace ZBase32Encoder
 {
     using System;
+    using System.Collections.Generic;
     using System.Text;
 
     public static class ZBase32Encoder
     {
         private const string EncodingTable = "ybndrfg8ejkmcpqxot1uwisza345h769";
 
-        private static readonly byte[] DecodintTable = new byte[128];
+        private static readonly byte[] DecodingTable = new byte[128];
 
         static ZBase32Encoder()
         {
-            for (var i = 0; i < DecodintTable.Length; ++i)
+            for (var i = 0; i < DecodingTable.Length; ++i)
             {
-                DecodintTable[i] = byte.MaxValue;
+                DecodingTable[i] = byte.MaxValue;
             }
 
             for (var i = 0; i < EncodingTable.Length; ++i)
             {
-                DecodintTable[EncodingTable[i]] = (byte)i;
+                DecodingTable[EncodingTable[i]] = (byte)i;
             }
         }
 
@@ -58,7 +59,65 @@
 
         public static byte[] Decode(string data)
         {
-            return null;
+            if (data == string.Empty)
+            {
+                return new byte[0];
+            }
+
+            var result = new List<byte>((int)Math.Ceiling(data.Length * 5.0 / 8.0));
+
+            var index = new int[8];
+            for (var i = 0; i < data.Length; )
+            {
+                i = CreateIndexByOctetAndMovePosition(ref data, i, ref index);
+
+                var shortByteCount = 0;
+                ulong buffer = 0;
+                for (var j = 0; j < 8 && index[j] != -1; ++j)
+                {
+                    buffer = (buffer << 5) | (ulong)(DecodingTable[index[j]] & 0x1f);
+                    shortByteCount++;
+                }
+
+                var bitCount = shortByteCount * 5;
+                while (bitCount >= 8)
+                {
+                    result.Add((byte)((buffer >> (bitCount - 8)) & 0xff));
+                    bitCount -= 8;
+                }
+            }
+
+            return result.ToArray();
+        }
+
+        private static int CreateIndexByOctetAndMovePosition(ref string data, int currentPosition, ref int[] index)
+        {
+            var j = 0;
+            while (j < 8)
+            {
+                if (currentPosition >= data.Length)
+                {
+                    index[j++] = -1;
+                    continue;
+                }
+
+                if (IgnoredSymbol(data[currentPosition]))
+                {
+                    currentPosition++;
+                    continue;
+                }
+
+                index[j] = data[currentPosition];
+                j++;
+                currentPosition++;
+            }
+
+            return currentPosition;
+        }
+
+        private static bool IgnoredSymbol(char checkedSymbol)
+        {
+            return checkedSymbol >= DecodingTable.Length || DecodingTable[checkedSymbol] == byte.MaxValue;
         }
     }
 }
